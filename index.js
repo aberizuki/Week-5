@@ -1,17 +1,20 @@
+require("dotenv").config();
+
 const { urlencoded, json } = require("express");
 const express = require("express");
 const app = express();
 const router = require("./src/route/index.route");
 const cors = require("cors");
-require("dotenv").config();
+
+app.use(express.static("public"));
 app.use(urlencoded({ extended: true }));
 app.use(json());
 app.use("/api/v1/", router);
-app.use(
-  cors({
-    origin: ["hinatazaka46.jp"],
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["hinatazaka46.jp"],
+//   })
+// );
 app.use(cors());
 
 app.get("*", (req, res) => {
